@@ -1,6 +1,5 @@
 import flet as ft
 
-
 def AgendaView()->ft.Control:
     """Devuelve una vista con un DataTable de citas futuras."""
     citas = [

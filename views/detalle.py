@@ -1,6 +1,5 @@
 import flet as ft
 
-
 def DetalleView() -> ft.Control:
     """Devuelve una vista con tarjetas de detalle de citas."""
     detalles_citas = [
@@ -25,12 +24,14 @@ def DetalleView() -> ft.Control:
     for cita in detalles_citas:
         card = ft.Card(
             content=ft.Container(
-                content=ft.Column([
-                    ft.Text(cita["estudiante"], size=20, weight=ft.FontWeight.BOLD),
+                content=ft.Column([ft.Row(
+                    controls=[ft.Icon(ft.Icons.ACCOUNT_CIRCLE, size=30, color=ft.Colors.BLUE),
+                    ft.Text(cita["estudiante"], size=20, weight=ft.FontWeight.BOLD)]),
                     ft.Text(f"Fecha y hora: {cita['fecha_hora']}"),
                     ft.Text(f"Notas: {cita['notas']}")
                 ]),
-                padding=15
+                padding=15,
+                bgcolor=ft.Colors.WHITE60
             )
         )
         cards.append(card)

@@ -1,12 +1,11 @@
-# main.py
 import flet as ft
 from views.agenda import AgendaView
 from views.perfil import profile_view
 from views.detalle import DetalleView
 
-
 def main(page: ft.Page):
     page.title = "Agenda Psicológica Supérate"
+
     views = [AgendaView, DetalleView, profile_view]
     current_view = ft.Container(expand=True)
     current_view.content = views[0]()
@@ -30,6 +29,5 @@ def main(page: ft.Page):
 
     # Vista por defecto al abrir la app
     page.add(ft.Row([nav, current_view],expand=True))
-
 
 ft.app(target=main)
