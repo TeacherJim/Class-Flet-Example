@@ -20,7 +20,7 @@ def PerfilView(page:ft.Page)->ft.Control:
 
     switch = ft.Switch(label="🌙 Modo oscuro", on_change=toggle_tema)
 
-    perfil_icono = ft.Text("👤", size=80)
+    perfil_icono = ft.Icon(name=ft.Icons.ACCOUNT_CIRCLE, size=96)
 
     contenido = ft.Column([
         perfil_icono,
