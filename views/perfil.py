@@ -1,11 +1,34 @@
 import flet as ft
-# Esta vista muestra una vista de perfil y ajustes (en construcción).
-def profile_view() -> ft.Control:
-    """Devuelve una vista de perfil y ajustes (en construcción)."""
-    # Contenido de la vista de perfil y ajustes
-    # Aquí se puede agregar más contenido o controles según sea necesario
-    return ft.Container(
-        content=ft.Text("Perfil/Ajustes (en construcción)", size=18),
-        padding=20,
-        expand=True
-    )
+
+
+def PerfilView(page:ft.Page)->ft.Control:
+    """Devuelve una vista de perfil con campos editables y modo oscuro."""
+    # estado local para modo oscuro
+    is_dark = ft.Ref[bool]()
+
+    # controles de texto para editar perfil
+    nombre = ft.TextField(label="Nombre", width=300)
+    apellido = ft.TextField(label="Apellido", width=300)
+    edad = ft.TextField(label="Edad", width=150)
+    grado = ft.TextField(label="Grado", width=150)
+
+    def toggle_tema(e):
+        """Cambia el modo claro/oscuro."""
+        is_dark.current = e.control.value
+        page.theme_mode = ft.ThemeMode.DARK if is_dark.current else ft.ThemeMode.LIGHT
+        page.update()
+
+    switch = ft.Switch(label="🌙 Modo oscuro", on_change=toggle_tema)
+
+    perfil_icono = ft.Text("👤", size=80)
+
+    contenido = ft.Column([
+        perfil_icono,
+        nombre,
+        apellido,
+        edad,
+        grado,
+        ft.Row([switch]),
+    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+
+    return ft.Container(content=contenido, padding=20, expand=True)

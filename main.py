@@ -1,21 +1,24 @@
 import flet as ft
 # Importación de las vistas desde sus respectivos módulos (archivos .py)
 from views.agenda import AgendaView
-from views.perfil import profile_view
+from views.perfil import PerfilView
 from views.detalle import DetalleView
 
 def main(page: ft.Page): # función principal que se ejecuta al iniciar la aplicación
     """Función principal que configura la aplicación Flet."""
     # Configuración de la página
     page.title = "Agenda Psicológica Supérate"
-    views = [AgendaView, DetalleView, profile_view]
+    views = [AgendaView, DetalleView,PerfilView]
     current_view = ft.Container(expand=True)
     current_view.content = views[0]()
 
     def cambiar_vista(evento):# función que cambia la vista según el destino seleccionado en NavigationRail
         """Cambia la vista según el destino seleccionado en NavigationRail."""
         page.clean()
-        current_view = views[evento.control.selected_index]()
+        if evento.control.selected_index == 2:
+            current_view = views[evento.control.selected_index](page)
+        else:
+            current_view = views[evento.control.selected_index]()
         page.add(ft.Row([nav, current_view], expand=True))
         page.update()
     # Creación del NavigationRail con destinos y eventos
